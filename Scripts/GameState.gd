@@ -4,6 +4,7 @@ extends Node3D
 @export var gold = 100
 
 signal updated
+signal game_over
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,5 +19,8 @@ func get_hp():
     return hp
 
 func deal_damage(dmg):
-    hp -= dmg
+    hp = max(0, hp - dmg)
     updated.emit()
+
+    if hp == 0:
+        game_over.emit()

@@ -1,7 +1,8 @@
 extends CharacterBody3D
 
+@export var health = 100
 @export var movement_speed: float = 2.0
-@export var dmg = 10
+@export var dmg = 100
 
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 
@@ -28,7 +29,15 @@ func reach_base():
     gs.deal_damage(dmg)
     queue_free()
 
+func receive_damage(dmg):
+    health = max(0, health - dmg)
+    $HpBar.mesh.material.set_shader_parameter("hp", health / 100.)
+    if health == 0:
+        queue_free()
+
 func _physics_process(delta):
+    $HpBar.look_at(get_node("/root/Main/Camera").position, Vector3.MODEL_TOP)
+
     if navigation_agent.is_navigation_finished():
         return
 

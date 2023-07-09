@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxq1fqfesckmf"]
+[gd_scene load_steps=8 format=3 uid="uid://dxq1fqfesckmf"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_dp1mr"]
+[ext_resource type="Shader" path="res://Shaders/hpbar.gdshader" id="2_ncbd3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kj427"]
 
@@ -10,7 +11,20 @@ albedo_color = Color(1, 0.815686, 0, 1)
 [sub_resource type="SphereMesh" id="SphereMesh_wd32m"]
 material = SubResource("StandardMaterial3D_xnxli")
 
-[node name="Enemy" type="CharacterBody3D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qyhb2"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_ncbd3")
+shader_parameter/hp = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8i5dy"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_qyhb2")
+size = Vector2(1, 4)
+subdivide_width = 512
+subdivide_depth = 512
+
+[node name="Enemy" type="CharacterBody3D" groups=["enemy"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 collision_layer = 2
 collision_mask = 4
@@ -26,3 +40,7 @@ mesh = SubResource("SphereMesh_wd32m")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_postprocessing = 1
 debug_enabled = true
+
+[node name="HpBar" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.33267e-08, 0.991199, 0, 0.991199, 4.33267e-08, 8.66534e-08, 8.66534e-08, 3.78774e-15, -0.991199, 0, 2, 0)
+mesh = SubResource("PlaneMesh_8i5dy")
