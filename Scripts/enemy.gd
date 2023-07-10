@@ -36,7 +36,7 @@ func receive_damage(dmg):
         queue_free()
 
 func _physics_process(delta):
-    $HpBar.look_at(get_node("/root/Main/Camera").position, Vector3.MODEL_TOP)
+    $HpBar.rotation_degrees = Vector3(0,90,0)
 
     if navigation_agent.is_navigation_finished():
         return
