@@ -9,4 +9,5 @@ func spawn_enemy():
     get_node("/root/Main").add_child(enemy)
 
 func _on_timer_timeout():
-    spawn_enemy() # Replace with function body.
+    spawn_enemy()
+    $Timer.wait_time -= 0.1

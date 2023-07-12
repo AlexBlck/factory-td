@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 @export var projectile_scene: PackedScene
 @export var cooldown: float = 0.5
+@export var worth: int = 100
 var visible_targets: Array[CharacterBody3D] = []
 
 # Called when the node enters the scene tree for the first time.

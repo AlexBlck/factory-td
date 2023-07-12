@@ -39,7 +39,6 @@ mesh = SubResource("SphereMesh_wd32m")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_postprocessing = 1
-debug_enabled = true
 
 [node name="HpBar" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1.73359e-08, 0.991199, 0, 0.3966, 4.33267e-08, 5.15175e-08, 3.46719e-08, 3.78774e-15, -0.589292, 0, 2, 0)

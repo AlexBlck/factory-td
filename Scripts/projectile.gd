@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
-@export var speed = 5
-@export var damage = 20
+@export var speed = 15
+@export var damage = 25
 
 func fire_towards(target):
     var flight_dir = position.direction_to(target.position).normalized()
