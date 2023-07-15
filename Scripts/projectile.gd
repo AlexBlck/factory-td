@@ -3,7 +3,11 @@ extends CharacterBody3D
 @export var speed = 15
 @export var damage = 25
 
-func fire_towards(target):
+func fire_towards(target, dmg, speed):
+    damage = dmg
+    speed = speed
+    if target == null:
+        return
     var flight_dir = position.direction_to(target.position).normalized()
     velocity = flight_dir * speed
 
@@ -19,3 +23,7 @@ func _physics_process(delta):
         queue_free()
 
     move_and_slide()
+
+
+func _on_visible_on_screen_notifier_3d_screen_exited():
+    queue_free()

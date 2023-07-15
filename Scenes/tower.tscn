@@ -1,45 +1,59 @@
-[gd_scene load_steps=7 format=3 uid="uid://y8fyrxdnqbae"]
+[gd_scene load_steps=8 format=3 uid="uid://y8fyrxdnqbae"]
 
 [ext_resource type="Script" path="res://Scripts/tower.gd" id="1_swb70"]
 [ext_resource type="PackedScene" uid="uid://bo4tmfc4mjnnx" path="res://Scenes/projectile.tscn" id="2_204pf"]
+[ext_resource type="ArrayMesh" uid="uid://b28uuh28ttqj1" path="res://Meshes/T1.obj" id="3_x8pf1"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_yenfu"]
 radius = 5.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5tdf1"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+disable_ambient_light = true
+albedo_color = Color(0.435294, 1, 1, 0.137255)
+disable_receive_shadows = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_1ebuf"]
+material = SubResource("StandardMaterial3D_5tdf1")
+radius = 5.0
+height = 10.0
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sa86s"]
 radius = 1.313
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b8yxs"]
-albedo_color = Color(0, 0.733333, 1, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_62d68"]
-material = SubResource("StandardMaterial3D_b8yxs")
-bottom_radius = 1.313
-
-[node name="Tower" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+[node name="Tower" type="CharacterBody3D" groups=["Tower"]]
 collision_layer = 4
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_swb70")
 projectile_scene = ExtResource("2_204pf")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="RangeArea" type="Area3D" parent="."]
 collision_layer = 4
 collision_mask = 2
 input_ray_pickable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="RangeCollider" type="CollisionShape3D" parent="RangeArea"]
 shape = SubResource("SphereShape3D_yenfu")
 
+[node name="RangeIndicator" type="MeshInstance3D" parent="RangeArea"]
+mesh = SubResource("SphereMesh_1ebuf")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_sa86s")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CylinderMesh_62d68")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0926565, 0)
+mesh = ExtResource("3_x8pf1")
 
 [node name="Timer" type="Timer" parent="."]
 
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="body_entered" from="RangeArea" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="RangeArea" to="." method="_on_area_3d_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

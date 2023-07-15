@@ -6,7 +6,7 @@ extends CharacterBody3D
 @export var worth = 10
 
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
-
+var distance_travelled: float = 0.0
 signal enemy_died(worth: int)
 
 func _ready():
@@ -17,6 +17,7 @@ func _ready():
 
     # Make sure to not await during _ready.
     call_deferred("actor_setup")
+
 
 func actor_setup():
     # Wait for the first physics frame so the NavigationServer can sync.
@@ -38,9 +39,16 @@ func die():
 
 func receive_damage(dmg):
     health = max(0, health - dmg)
-    $HpBar.mesh.material.set_shader_parameter("hp", health / 100.)
+    $HpBar.mesh.material.set_shader_parameter("hp", health)
     if health == 0:
         die()
+
+func adjust_difficulty(wave_num):
+    var step = wave_num / 1
+    health *= 1 + step / 10.0
+    $HpBar.mesh.material.set_shader_parameter("max_hp", health)
+    $HpBar.mesh.material.set_shader_parameter("hp", health)
+
 
 func _physics_process(delta):
     $HpBar.rotation_degrees = Vector3(0,90,0)
@@ -50,7 +58,6 @@ func _physics_process(delta):
 
     var current_agent_position: Vector3 = global_position
     var next_path_position: Vector3 = navigation_agent.get_next_path_position()
-
     var new_velocity: Vector3 = next_path_position - current_agent_position
     new_velocity = new_velocity.normalized()
     new_velocity = new_velocity * movement_speed
@@ -63,4 +70,5 @@ func _physics_process(delta):
             reach_base()
 
     velocity = new_velocity
+    distance_travelled += velocity.length()
     move_and_slide()

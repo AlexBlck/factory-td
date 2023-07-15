@@ -1,7 +1,7 @@
 [gd_scene load_steps=22 format=3 uid="uid://c467bvv7y61ba"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_hb3si"]
-[ext_resource type="PackedScene" uid="uid://dxq1fqfesckmf" path="res://Scenes/enemy.tscn" id="2_53nlx"]
+[ext_resource type="PackedScene" uid="uid://dxq1fqfesckmf" path="res://Scenes/Enemies/normie.tscn" id="2_53nlx"]
 [ext_resource type="Script" path="res://Scripts/EnemySpawner.gd" id="2_foniw"]
 [ext_resource type="Script" path="res://Scripts/Base.gd" id="4_lj7bv"]
 [ext_resource type="Script" path="res://Scripts/GameState.gd" id="5_0qiud"]

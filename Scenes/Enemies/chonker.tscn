@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://bpfte2vca4anb"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_4plmw"]
+[ext_resource type="Shader" path="res://Shaders/hpbar.gdshader" id="2_4rnsj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_drykd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ql4g"]
+albedo_color = Color(0.305882, 0.603922, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_apnuj"]
+material = SubResource("StandardMaterial3D_6ql4g")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qyhb2"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_4rnsj")
+shader_parameter/hp = 250.0
+shader_parameter/max_hp = 250.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8i5dy"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_qyhb2")
+size = Vector2(1, 4)
+subdivide_width = 512
+subdivide_depth = 512
+
+[node name="Enemy" type="CharacterBody3D" groups=["enemy"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+collision_layer = 2
+collision_mask = 4
+motion_mode = 1
+script = ExtResource("1_4plmw")
+health = 250
+movement_speed = 1.0
+dmg = 1
+worth = 15
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_drykd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_apnuj")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_postprocessing = 1
+neighbor_distance = 10.0
+max_speed = 5.0
+
+[node name="HpBar" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.73359e-08, 0.991199, 0, 0.3966, 4.33267e-08, 5.15175e-08, 3.46719e-08, 3.78774e-15, -0.589292, 0, 1, 0)
+layers = 2
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_8i5dy")
