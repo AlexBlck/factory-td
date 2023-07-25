@@ -5,6 +5,8 @@ extends CharacterBody3D
 @export var dmg = 100
 @export var worth = 10
 
+@export var death_particles_scene: PackedScene
+
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 var distance_travelled: float = 0.0
 signal enemy_died(worth: int)
@@ -35,6 +37,9 @@ func reach_base():
 func die():
     var gs = get_node("/root/Main/GameState")
     gs.on_enemy_died(worth)
+    var death_particles = death_particles_scene.instantiate()
+    death_particles.position = position
+    get_node("/root/Main").add_child(death_particles)
     queue_free()
 
 func receive_damage(dmg):

@@ -121,6 +121,10 @@ navigation_mesh = SubResource("NavigationMesh_4ko1m")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 collision_mask = 0
 
+[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="NavigationRegion3D/Floor"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+size = Vector3(18.1201, 2, 14.5138)
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Floor"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -2.2, 0)
 mesh = SubResource("ArrayMesh_xpyf1")

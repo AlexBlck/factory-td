@@ -25,10 +25,10 @@ void fragment() {
     hp_slider = step(UV.y, hp / max_hp);
 
     float column = current_hp_clumn(UV.y);
-    if (mod(column, 100.) < 1. && column > 1.){
+    if (mod(column, 100.) < max_hp * 0.025 && column > max_hp * 0.025){
         ALBEDO = vec3(0.);
-    } else if (mod(column, 10.) < 1. && UV.x > 0.5){
-        ALBEDO = vec3(0.);
+    //} else if (mod(column, 10.) < 5. && UV.x > 0.5){
+     //   ALBEDO = vec3(0.);
     } else {
         ALBEDO = mix(red, green, hp_slider);
     }

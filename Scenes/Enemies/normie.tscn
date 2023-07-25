@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dxq1fqfesckmf"]
+[gd_scene load_steps=9 format=3 uid="uid://dxq1fqfesckmf"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_dp1mr"]
+[ext_resource type="PackedScene" uid="uid://bv3kgxb28bj6u" path="res://Scenes/Particles/enemy_death_particles.tscn" id="2_dclmr"]
 [ext_resource type="Shader" path="res://Shaders/hpbar.gdshader" id="2_ncbd3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kj427"]
@@ -33,6 +34,7 @@ motion_mode = 1
 script = ExtResource("1_dp1mr")
 movement_speed = 2.5
 dmg = 1
+death_particles_scene = ExtResource("2_dclmr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_kj427")

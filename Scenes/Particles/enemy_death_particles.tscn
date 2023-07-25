@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bv3kgxb28bj6u"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5nvvr"]
+direction = Vector3(1, 1, 1)
+spread = 180.0
+initial_velocity_min = 2.0
+initial_velocity_max = 2.0
+collision_mode = 1
+collision_friction = 0.09
+collision_bounce = 0.23
+collision_use_scale = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_7h6e6"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[sub_resource type="Skin" id="Skin_oxgk7"]
+
+[node name="Enemy death particles" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 40
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_5nvvr")
+draw_pass_1 = SubResource("BoxMesh_7h6e6")
+draw_skin = SubResource("Skin_oxgk7")

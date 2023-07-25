@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpfte2vca4anb"]
+[gd_scene load_steps=9 format=3 uid="uid://bpfte2vca4anb"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_4plmw"]
 [ext_resource type="Shader" path="res://Shaders/hpbar.gdshader" id="2_4rnsj"]
+[ext_resource type="PackedScene" uid="uid://bv3kgxb28bj6u" path="res://Scenes/Particles/enemy_death_particles.tscn" id="2_wfegp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_drykd"]
 
@@ -35,6 +36,7 @@ health = 250
 movement_speed = 1.0
 dmg = 1
 worth = 15
+death_particles_scene = ExtResource("2_wfegp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_drykd")
